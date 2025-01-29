@@ -1,4 +1,4 @@
-package com.example.MoviesController;
+package com.example.model;
 
 public class Movie {
   private int id;

@@ -1,6 +1,6 @@
-package com.example.MoviesController;
+package com.example.controller;
 
-import org.springframework.boot.SpringApplication;
+import com.example.model.Movie;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +11,13 @@ import java.util.List;
 
 @SpringBootApplication
 @RestController
-public class MoviesControllerApplication {
+public class MovieController {
   List<Movie> movies = new ArrayList<>(
           List.of(
                   new Movie(4, "fuck", "me"),
                   new Movie(69, "why", "hate")
           )
   );
-
-  public static void main(String[] args) {
-    SpringApplication.run(MoviesControllerApplication.class, args);
-
-  }
 
   @GetMapping("/movies")
   public List<Movie> getMovies() {
@@ -34,12 +29,13 @@ public class MoviesControllerApplication {
     return movies.stream().filter(movie -> movie.getId() == id).findFirst().orElse(null);
   }
 
-  @PostMapping("movies")
+  @PostMapping("/movies")
   public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
     if (movies.contains(movie)) {
       return ResponseEntity.badRequest().build();
 
     }
+
     movies.add(movie);
     return ResponseEntity.created(
                     ServletUriComponentsBuilder
@@ -49,5 +45,4 @@ public class MoviesControllerApplication {
                             .toUri())
             .body(movie);
   }
-
 }

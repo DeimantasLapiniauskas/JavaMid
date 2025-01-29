@@ -1,13 +1,13 @@
-package com.example.MoviesController;
+package com.example.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MoviesControllerApplicationTests {
+class MovieControllerTests {
 
-	@Test
-	void contextLoads() {
-	}
+  @Test
+  void contextLoads() {
+  }
 
 }
