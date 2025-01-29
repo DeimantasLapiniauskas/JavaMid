@@ -22,24 +22,31 @@ public class MovieController {
   );
 
   @GetMapping("/movies")
-  public List<Movie> getMovies() {
-    return movies;
+  public ResponseEntity<List<Movie>> getMovies() {
+    return ResponseEntity.ok().body(movies);
   }
 
   @GetMapping("/movies/{id}")
-  public Movie getMovie(@PathVariable int id) {
-    return movies.stream().filter(movie -> movie.getId() == id).findFirst().orElse(null);
+  public ResponseEntity<Movie> getMovie(@PathVariable int id) {
+    return ResponseEntity.ok().body(movies.stream().filter(movie -> movie.getId() == id).findFirst().orElse(null));
   }
 
   @GetMapping("/movies/search")
-  public List<Movie> searchMovies(@RequestParam String title) {
-    return movies.stream()
+  public ResponseEntity<List<Movie>> searchMovies(@RequestParam String title) {
+    return ResponseEntity.ok().body(movies.stream()
             .filter(movie -> Objects
                     .equals(
                             movie.getTitle(), title
                     )
             )
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
+//            movies.stream()
+//            .filter(movie -> Objects
+//                    .equals(
+//                            movie.getTitle(), title
+//                    )
+//            )
+//            .collect(Collectors.toList());
   }
 
   @PostMapping("/movies")
