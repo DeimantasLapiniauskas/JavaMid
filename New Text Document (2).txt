@@ -1,0 +1,55 @@
+   20  mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+   21  mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+   22
+   23  git remote add origin https://github.com/DeimantasLapiniauskas/JavaMid.git
+   24  git branch -M main
+   25  git push -u origin main
+   26  git add .
+   27  git commit -n "init"
+   28  git commit -m "init"
+   29  git push -u origin main
+   30  mvn archetype:generate
+   31  git init
+   32  git add .
+   33  git status
+   34  git commit -m "added gitignore"
+   35  git push
+   36  git add .
+   37  git status
+   38  git commit -m "updated gitignore"
+   39  git push
+   40  mvn package
+   41  cd my-app/
+   42  mvn package
+   43  cd target/
+   44  cd ..
+   45  cd target/
+   46  java -jar my-app-1.0-SNAPSHOT.jar
+   47  java -jar ./my-app-1.0-SNAPSHOT.jar
+   48  my-app-1.0-SNAPSHOT.jar
+   49  java -jar ./my-app-1.0-SNAPSHOT.jar
+   50  mvn compile
+   51  cd ..
+   52  mvn compile
+   53  cd target/
+   54  cd ..
+   55  mvn package
+   56  cd target/
+   57  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+   58
+   59  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+   60  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app
+   61  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.App
+   62  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+   63  java -cp ./my-app-1.0-SNAPSHOT.jar com.mycompany.app
+   64  java -cp target/my-app-1.0-SNAPSHOT.jar my-app-1.0-SNAPSHOT.jar
+   65  java -cp target/my-app-1.0-SNAPSHOT.jar my-app
+   66  java -cp target/my-app-1.0-SNAPSHOT.jar my-app-1.0-SNAPSHOT.jar
+   67  java -cp target/my-app-1.0-SNAPSHOT.jar ./my-app-1.0-SNAPSHOT.jar
+   68  java -cp target/my-app-1.0-SNAPSHOT.jar ./my-app-1.0-SNAPSHOT.jar
+   69  java -cp target/my-app-1.0-SNAPSHOT.jar my-app-1.0-SNAPSHOT.jar
+   70  java -cp target/my-app-1.0-SNAPSHOT.jar .\my-app-1.0-SNAPSHOT.jar
+   71  cd ..
+   72  java -cp target/my-app-1.0-SNAPSHOT.jar my-app-1.0-SNAPSHOT.jar
+   73  java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+   74  history
