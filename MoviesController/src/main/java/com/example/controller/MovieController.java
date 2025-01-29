@@ -8,6 +8,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 @RestController
@@ -27,6 +29,17 @@ public class MovieController {
   @GetMapping("/movies/{id}")
   public Movie getMovie(@PathVariable int id) {
     return movies.stream().filter(movie -> movie.getId() == id).findFirst().orElse(null);
+  }
+
+  @GetMapping("/movies/search")
+  public List<Movie> searchMovies(@RequestParam String title) {
+    return movies.stream()
+            .filter(movie -> Objects
+                    .equals(
+                            movie.getTitle(), title
+                    )
+            )
+            .collect(Collectors.toList());
   }
 
   @PostMapping("/movies")
