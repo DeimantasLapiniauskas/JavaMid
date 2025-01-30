@@ -1,22 +1,27 @@
-package com.example.model;
+package com.example.ThreePointOne.model;
 
-public class Movie { // regular class, except getters and setters are mandatory.
-  private int id;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "movies")
+public class Movie {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
   private String title;
   private String director;
 
-  public Movie(int id, String title, String director) {
-    this.id = id;
+  public Movie() {
+  }
+
+  public Movie(String title, String director) {
     this.title = title;
     this.director = director;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getTitle() {
