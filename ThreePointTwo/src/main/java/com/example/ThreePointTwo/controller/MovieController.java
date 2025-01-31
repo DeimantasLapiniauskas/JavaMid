@@ -58,7 +58,7 @@ public class MovieController {
     return ResponseEntity.ok(movieService.saveMovie(movieFromDB));
   }
 
-  @DeleteMapping("/movies/{id}")
+  @DeleteMapping("/movies/{id}") //kill
   public ResponseEntity<Void> deleteMovie(@PathVariable long id) {
     if (!movieService.findMovieByID(id)) {
       return ResponseEntity.notFound().build();
