@@ -2,31 +2,43 @@ package com.example.monday.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "screenings")
 public class Screening {
+  
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private String date;
+  private String theatreName;
+  private LocalDateTime dateAndTime;
 
-  public Screening(String date) {
-    this.date = date;
+  public Screening(String TheatreName, LocalDateTime dateAndTime) {
+    this.dateAndTime = dateAndTime;
+    this.theatreName = TheatreName;
   }
 
   public Screening() {
-  }
-
-  public String getDate() {
-    return date;
-  }
-
-  public void setDate(String date) {
-    this.date = date;
   }
 
   public long getId() {
     return id;
   }
 
+  public String getTheatreName() {
+    return theatreName;
+  }
+
+  public void setTheatreName(String theatreName) {
+    this.theatreName = theatreName;
+  }
+
+  public LocalDateTime getDateAndTime() {
+    return dateAndTime;
+  }
+
+  public void setDateAndTime(LocalDateTime dateAndTime) {
+    this.dateAndTime = dateAndTime;
+  }
 }

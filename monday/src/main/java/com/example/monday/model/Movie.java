@@ -24,6 +24,7 @@ public class Movie {
   public Movie(String title, String director, List<Screening> screenings) {
     this.title = title;
     this.director = director;
+    this.screenings = screenings;
   }
 
   public long getId() {

@@ -54,6 +54,7 @@ public class MovieController {
 
     movieFromDB.setTitle(movie.getTitle());
     movieFromDB.setDirector(movie.getDirector());
+    movieFromDB.setScreenings(movie.getScreenings());
 
     return ResponseEntity.ok(movieService.saveMovie(movieFromDB));
   }
