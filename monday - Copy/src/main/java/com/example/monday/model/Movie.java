@@ -18,7 +18,7 @@ public class Movie {
   @JoinColumn(name = "movie_id")
   private List<Screening> screenings;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany
   @JoinTable(
           name = "movies_actors",
           joinColumns = @JoinColumn(name = "movie_id"),
