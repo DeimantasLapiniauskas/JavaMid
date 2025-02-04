@@ -22,7 +22,10 @@ public class Movie {
 
   @NotNull
   @Size(max = 50)
-  @Pattern(regexp = "^[A-Z][a-z]+$", message = "Name must start with a capital letter, and contain at least one other letter or space.")
+  @Pattern(
+          regexp = "^[A-Z][a-z]+$",
+          message = "Name must start with a capital letter, and" +
+                  " be followed by at least one non-capital letter")
   private String director;
 
   @OneToMany(cascade = CascadeType.ALL)
