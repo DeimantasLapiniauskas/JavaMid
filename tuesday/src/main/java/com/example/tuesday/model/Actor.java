@@ -1,4 +1,4 @@
-package com.example.monday.model;
+package com.example.tuesday.model;
 
 import jakarta.persistence.*;
 

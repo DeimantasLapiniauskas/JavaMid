@@ -1,6 +1,10 @@
-package com.example.monday.model;
+package com.example.tuesday.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,7 +15,14 @@ public class Movie {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
+
+  @Size(min = 2, max = 100)
+  @NotNull
   private String title;
+
+  @NotNull
+  @Size(max = 50)
+  @Pattern(regexp = "^[A-Z][a-z]+$", message = "Name must start with a capital letter, and contain at least one other letter or space.")
   private String director;
 
   @OneToMany(cascade = CascadeType.ALL)
@@ -24,6 +35,7 @@ public class Movie {
           joinColumns = @JoinColumn(name = "movie_id"),
           inverseJoinColumns = @JoinColumn(name = "actor_id")
   )
+  @NotEmpty
   private List<Actor> actors;
 
   public Movie() {
