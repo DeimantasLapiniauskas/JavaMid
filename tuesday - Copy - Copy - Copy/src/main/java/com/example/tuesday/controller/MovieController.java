@@ -3,8 +3,9 @@ package com.example.tuesday.controller;
 import com.example.tuesday.model.Movie;
 import com.example.tuesday.service.MovieService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @RestController
 public class MovieController {
+
+  // why the fuck does ctrl+alt+l auto-format some comments to a new line,
+  // but not all of them???
 
   private final MovieService movieService;
 
@@ -27,7 +31,8 @@ public class MovieController {
   }
 
   @GetMapping("/movies/{id}")
-  ResponseEntity<Movie> getMovieById(@PathVariable long id) { // get by ID
+    // get by ID
+  ResponseEntity<Movie> getMovieById(@PathVariable long id) {
     if (!movieService.findMovieByID(id)) {
       return ResponseEntity.notFound().build();
     }
@@ -35,14 +40,16 @@ public class MovieController {
   }
 
   @GetMapping("/movies/pagination")
-  ResponseEntity<List<Movie>> getMovieByPage(@RequestParam int page,
+    // get by pages
+  ResponseEntity<List<Movie>> getMovieByPage(@RequestParam @Min(0) @Max(10) int page,
                                              @RequestParam int size,
                                              @RequestParam(required = false) String sort) {
     return ResponseEntity.ok(movieService.findAllMoviesByPage(page, size, sort).getContent());
   }
 
   @PostMapping("/movies")
-  ResponseEntity<Movie> saveMovie(@Valid @RequestBody Movie movie) { // make shit up idfk
+    // make shit up idfk
+  ResponseEntity<Movie> saveMovie(@Valid @RequestBody Movie movie) {
     movieService.saveMovie(movie);
     return ResponseEntity.ok(movie);
   }
