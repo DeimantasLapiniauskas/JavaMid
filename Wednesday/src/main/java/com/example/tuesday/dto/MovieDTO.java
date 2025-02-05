@@ -19,7 +19,8 @@ public record MovieDTO(
         @Pattern(
                 regexp = "^[A-Z][a-z]+$", // see: message below
                 message = "Name must start with a capital letter, and" +
-                        " be followed by at least one non-capital letter")
+                        " be followed by at least one non-capital letter"
+        )
         String director,
 
         List<Screening> screenings,

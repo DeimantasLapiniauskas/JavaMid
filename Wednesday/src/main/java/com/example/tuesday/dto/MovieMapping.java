@@ -2,7 +2,6 @@ package com.example.tuesday.dto;
 
 import com.example.tuesday.model.Movie;
 
-import java.awt.print.Book;
 import java.util.List;
 
 public class MovieMapping {
@@ -25,7 +24,6 @@ public class MovieMapping {
     return new MovieDTO(movie.getTitle(), movie.getDirector(), movie.getScreenings(), movie.getActors());
   }
 
-  //
   public static Movie toMovie(MovieDTO movieDTO) {
     Movie movie = new Movie();
     updateMovieFromDTO(movie, movieDTO);
@@ -33,10 +31,12 @@ public class MovieMapping {
     return movie;
   }
 
+  //uses setters of movie to be identical to movieDTO
   public static void updateMovieFromDTO(Movie movie, MovieDTO movieDTO) {
     movie.setTitle(movieDTO.title());
     movie.setDirector(movieDTO.director());
     movie.setScreenings(movieDTO.screenings());
     movie.setActors(movieDTO.actors());
   }
+
 }
