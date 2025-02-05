@@ -1,0 +1,30 @@
+package com.example.tuesday.dto;
+
+import com.example.tuesday.model.Actor;
+import com.example.tuesday.model.Screening;
+import com.example.tuesday.validation.Title;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
+
+public record MovieDTO(
+        @Title
+        String title,
+
+        @NotNull
+        @Size(max = 50, message = "Field has to be between 2 and 50 characters long.")
+        @Pattern(
+                regexp = "^[A-Z][a-z]+$",
+                message = "Name must start with a capital letter, and" +
+                        " be followed by at least one non-capital letter")
+        String director,
+
+        List<Screening> screenings,
+
+        @NotEmpty(message = "What, are you gonna make a movie without actors?")
+        List<Actor> actors) {
+
+}
