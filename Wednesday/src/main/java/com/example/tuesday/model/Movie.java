@@ -17,15 +17,8 @@ public class Movie {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Title
   private String title;
 
-  @NotNull
-  @Size(max = 50, message = "Field has to be between 2 and 50 characters long.")
-  @Pattern(
-          regexp = "^[A-Z][a-z]+$",
-          message = "Name must start with a capital letter, and" +
-                  " be followed by at least one non-capital letter")
   private String director;
 
   @OneToMany(cascade = CascadeType.ALL)
@@ -38,10 +31,9 @@ public class Movie {
           joinColumns = @JoinColumn(name = "movie_id"),
           inverseJoinColumns = @JoinColumn(name = "actor_id")
   )
-  @NotEmpty(message = "What, are you gonna make a movie without actors?")
   private List<Actor> actors;
 
-  public Movie() {
+  public Movie() { // necessary for conversion from json
   }
 
   public Movie(String title, String director, List<Screening> screenings, List<Actor> actors) {

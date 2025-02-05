@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,7 +36,7 @@ public class MovieController {
   @GetMapping("/movies/{id}")
     // get by ID
   ResponseEntity<MovieDTO> getMovieById(@PathVariable long id) {
-    if (!movieService.findMovieByID(id)) {
+    if (!movieService.existsMovieByID(id)) {
       return ResponseEntity.notFound().build();
     }
 
@@ -58,17 +59,34 @@ public class MovieController {
 
   @PostMapping("/movies")
     // make shit up idfk
-  ResponseEntity<MovieDTO> saveMovie(@Valid @RequestBody MovieDTO movieDTO) {
+  ResponseEntity<?> saveMovie(@Valid @RequestBody MovieDTO movieDTO) {
+    if (movieService.existsMovieByTitle(movieDTO.title()) &&
+            movieService.existsMovieByDirector(movieDTO.director())
+    ) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("Movie with that title and director already exists");
+    }
+
     movieService.saveMovie(MovieMapping.toMovie(movieDTO));
 
     return ResponseEntity.ok(movieDTO);
   }
 
   @PutMapping("/movies/{id}") // update by id. if id is free, make shit up idfk
-  public ResponseEntity<MovieDTO> updateMovie(@PathVariable long id,
-                                              @Valid @RequestBody MovieDTO movieDTO) {
+  public ResponseEntity<?> updateMovie(@PathVariable long id,
+                                       @Valid @RequestBody MovieDTO movieDTO) {
 
-    if (!movieService.findMovieByID(id)) {
+
+    if (movieService.existsMovieByTitleAndNotId(movieDTO.title(), id) &&
+            movieService.existsMovieByDirectorAndNotId(movieDTO.director(), id)
+    ) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("Movie with that title and director already exists");
+    }
+
+    if (!movieService.existsMovieByID(id)) {
       movieService.saveMovie(MovieMapping.toMovie(movieDTO));
 
       return ResponseEntity.created(
@@ -88,7 +106,7 @@ public class MovieController {
 
   @DeleteMapping("/movies/{id}") //kill
   public ResponseEntity<Void> deleteMovie(@PathVariable long id) {
-    if (!movieService.findMovieByID(id)) {
+    if (!movieService.existsMovieByID(id)) {
       return ResponseEntity.notFound().build();
     }
 

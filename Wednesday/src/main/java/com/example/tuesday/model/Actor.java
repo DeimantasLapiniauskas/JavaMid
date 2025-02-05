@@ -1,6 +1,7 @@
 package com.example.tuesday.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -12,9 +13,11 @@ public class Actor {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @NotNull
   @Size(min = 2, max = 50, message = "Field has to be between 2 and 50 characters long.")
   private String your;
 
+  @NotNull
   @Pattern(
           regexp = "^[A-Z][a-z]+$",
           message = "Liking must start with a capital letter, and" +

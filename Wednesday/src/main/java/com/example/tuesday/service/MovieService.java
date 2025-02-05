@@ -36,8 +36,24 @@ public class MovieService {
     return movie;
   }
 
-  public boolean findMovieByID(long id) {
-    return movieRepository.findById(id).isPresent();
+  public boolean existsMovieByID(long id) {
+    return movieRepository.existsById(id);
+  }
+
+  public boolean existsMovieByTitle(String title) {
+    return movieRepository.existsMovieByTitle(title);
+  }
+
+  public boolean existsMovieByDirector(String director) {
+    return movieRepository.existsMovieByDirector(director);
+  }
+
+  public boolean existsMovieByTitleAndNotId(String title, Long id) {
+    return movieRepository.existsMovieByTitleAndIdNot(title, id);
+  }
+
+  public boolean existsMovieByDirectorAndNotId(String director, Long id) {
+    return movieRepository.existsMovieByDirectorAndIdNot(director, id);
   }
 
   public void deleteMovieById(long id) {

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12776085-195c-4fdb-ad50-b594d69b3233" name="Changes" comment="" />
+    <list default="true" id="12776085-195c-4fdb-ad50-b594d69b3233" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/controller/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/controller/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/model/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/model/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/model/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/model/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/repository/MovieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/repository/MovieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/service/MovieService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/service/MovieService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/validation/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/validation/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/validation/TitleValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Wednesday/src/main/java/com/example/tuesday/validation/TitleValidator.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +63,7 @@
     "Spring Boot.ThreePointOneApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/D3JP/Desktop/git java/JavaMid/ThreePointTwo",
+    "last_opened_file_path": "C:/Users/D3JP/Desktop/git java/JavaMid/ThreePointOne",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -108,6 +116,7 @@
       <updated>1737234195934</updated>
       <workItem from="1738224786912" duration="825000" />
       <workItem from="1738225885369" duration="166000" />
+      <workItem from="1738750405039" duration="13000" />
     </task>
     <servers />
   </component>

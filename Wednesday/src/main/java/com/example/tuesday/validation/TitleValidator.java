@@ -8,6 +8,9 @@ public class TitleValidator implements ConstraintValidator<Title, String> {
 
   @Override
   public boolean isValid(String title, ConstraintValidatorContext constraintValidatorContext) {
-    return title != null && title.length() > 2 && title.length() <= 100 && title.matches("[a-zA-Z]*");
+    return title != null &&
+            title.length() > 2 &&
+            title.length() <= 100 &&
+            title.matches("[a-zA-Z]+");
   }
 }
