@@ -71,10 +71,7 @@ public class MovieController {
 
     Movie movieFromDB = movieService.getMovieById(id).get();
 
-    movieFromDB.setTitle(movieDTO.title());
-    movieFromDB.setDirector(movieDTO.director());
-    movieFromDB.setScreenings(movieDTO.screenings());
-    movieFromDB.setActors(movieDTO.actors());
+    MovieMapping.updateMovieFromDTO(movieFromDB, movieDTO);
 
     return ResponseEntity.ok(MovieMapping.toMovieDTO(movieService.saveMovie(movieFromDB)));
   }
@@ -88,5 +85,5 @@ public class MovieController {
     movieService.deleteMovieById(id);
     return ResponseEntity.noContent().build();
   }
-  
+
 }
