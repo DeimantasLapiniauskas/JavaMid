@@ -17,7 +17,7 @@ public record MovieDTO(
         @NotNull
         @Size(max = 50, message = "Field has to be between 2 and 50 characters long.")
         @Pattern(
-                regexp = "^[A-Z][a-z]+$",
+                regexp = "^[A-Z][a-z]+$", // see: message below
                 message = "Name must start with a capital letter, and" +
                         " be followed by at least one non-capital letter")
         String director,

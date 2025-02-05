@@ -28,7 +28,7 @@ public class MovieController {
   }
 
   @GetMapping("/movies") //basic get all
-  public ResponseEntity<List<MovieDTO>> getAllBooks() {
+  public ResponseEntity<List<MovieDTO>> getAllMovies() {
     return ResponseEntity.ok(MovieMapping.toMovieDTOList(movieService.findAllMovies()));
   }
 
@@ -38,6 +38,7 @@ public class MovieController {
     if (!movieService.findMovieByID(id)) {
       return ResponseEntity.notFound().build();
     }
+
     return ResponseEntity.ok(MovieMapping.toMovieDTO(movieService.getMovieById(id).get()));
   }
 
@@ -46,21 +47,30 @@ public class MovieController {
   ResponseEntity<List<MovieDTO>> getMovieByPage(@RequestParam @Min(0) @Max(10) int page,
                                                 @RequestParam int size,
                                                 @RequestParam(required = false) String sort) {
-    return ResponseEntity.ok(MovieMapping.toMovieDTOList(movieService.findAllMoviesByPage(page, size, sort).getContent()));
+    return ResponseEntity.ok(MovieMapping
+            .toMovieDTOList(
+                    movieService
+                            .findAllMoviesByPage(
+                                    page, size, sort
+                            )
+                            .getContent()));
   }
 
   @PostMapping("/movies")
     // make shit up idfk
   ResponseEntity<MovieDTO> saveMovie(@Valid @RequestBody MovieDTO movieDTO) {
     movieService.saveMovie(MovieMapping.toMovie(movieDTO));
+
     return ResponseEntity.ok(movieDTO);
   }
 
   @PutMapping("/movies/{id}") // update by id. if id is free, make shit up idfk
   public ResponseEntity<MovieDTO> updateMovie(@PathVariable long id,
                                               @Valid @RequestBody MovieDTO movieDTO) {
+
     if (!movieService.findMovieByID(id)) {
       movieService.saveMovie(MovieMapping.toMovie(movieDTO));
+
       return ResponseEntity.created(
                       ServletUriComponentsBuilder.fromCurrentRequest()
                               .replacePath("/movies/{id}")
@@ -83,6 +93,7 @@ public class MovieController {
     }
 
     movieService.deleteMovieById(id);
+
     return ResponseEntity.noContent().build();
   }
 
