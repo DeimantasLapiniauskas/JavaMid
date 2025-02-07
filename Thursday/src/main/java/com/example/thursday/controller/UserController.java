@@ -1,7 +1,8 @@
 package com.example.thursday.controller;
 
-import com.example.thursday.dto.UserDTO;
 import com.example.thursday.dto.UserMapping;
+import com.example.thursday.dto.UserRequestDTO;
+import com.example.thursday.dto.UserResponseDTO;
 import com.example.thursday.model.User;
 import com.example.thursday.service.UserService;
 import jakarta.validation.Valid;
@@ -26,38 +27,38 @@ public class UserController {
   }
 
   @GetMapping("/users")
-  public ResponseEntity<List<UserDTO>> getAllUsers() {
-    return ResponseEntity.ok(UserMapping.toUserDTOList(userService.findAllUsers()));
+  public ResponseEntity<List<UserRequestDTO>> getAllUsers() {
+    return ResponseEntity.ok(UserMapping.toUserDTOOutList(userService.findAllUsers()));
   }
 
   @GetMapping("/users/{id}")
-  public ResponseEntity<UserDTO> getUserById(@PathVariable long id) {
+  public ResponseEntity<UserRequestDTO> getUserById(@PathVariable long id) {
 
     Optional<User> foundUser = userService.findUserById(id);
     if (foundUser.isEmpty()) {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.ok(UserMapping.toUserDTO(foundUser.get()));
+    return ResponseEntity.ok(UserMapping.toUserOutDTO(foundUser.get()));
   }
 
-  //todo: @valid
   @PostMapping("/users")
-  public ResponseEntity<?> addUser(@Valid @RequestBody UserDTO userDTO) {
-    if (userService.existsUserByUsername(userDTO.username())) {
+  public ResponseEntity<?> addUser(@Valid @RequestBody UserResponseDTO userResponseDTO) {
+    if (userService.existsUserByUsername(userResponseDTO.username())) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username taken, please choose another!");
     }
 
-    User user = UserMapping.toUser(userDTO);
+    User user = UserMapping.toUser(userResponseDTO);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userService.saveUser(user);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+    return ResponseEntity.status(HttpStatus.CREATED)
+            .body(UserMapping.toUserOutDTO(UserMapping.toUser(userResponseDTO)));
   }
 
   @PutMapping("/users/{id}")
-  public ResponseEntity<?> updateUser(@PathVariable long id, @Valid @RequestBody UserDTO userDTO) {
-    if (userService.existsUserByUsernameAndNotId(userDTO.username(), id)) {
+  public ResponseEntity<?> updateUser(@PathVariable long id, @Valid @RequestBody UserResponseDTO userResponseDTO) {
+    if (userService.existsUserByUsernameAndNotId(userResponseDTO.username(), id)) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists!");
     }
 
@@ -66,11 +67,17 @@ public class UserController {
     }
 
     User userFromDB = userService.findUserById(id).get();
-    userFromDB.setUsername(userDTO.username());
-    userFromDB.setPassword(passwordEncoder.encode(userDTO.password()));
+    userFromDB.setUsername(userResponseDTO.username());
+    userFromDB.setPassword(passwordEncoder.encode(userResponseDTO.password()));
+    userFromDB.setRoles(userResponseDTO.roles());
 
-    //return userDTO, too
-    return ResponseEntity.ok(userService.saveUser(userFromDB));
+    userService.saveUser(userFromDB);
+
+    return ResponseEntity.ok(
+            UserMapping.toUserOutDTO(
+                    userService.saveUser(userFromDB)
+            )
+    );
   }
 
   @DeleteMapping("/users/{id}")
@@ -82,6 +89,5 @@ public class UserController {
 
     return ResponseEntity.noContent().build();
   }
-
 
 }

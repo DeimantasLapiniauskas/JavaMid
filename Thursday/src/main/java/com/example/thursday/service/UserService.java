@@ -1,5 +1,6 @@
 package com.example.thursday.service;
 
+import com.example.thursday.dto.UserRequestDTO;
 import com.example.thursday.model.User;
 import com.example.thursday.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

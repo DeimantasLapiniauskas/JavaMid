@@ -1,37 +1,32 @@
 package com.example.thursday.dto;
 
 import com.example.thursday.model.User;
+import com.example.thursday.security.SecurityConfig;
 
 import java.util.List;
 
 public class UserMapping {
 
-  public static List<UserDTO> toUserDTOList(List<User> users) {
+  public static List<UserRequestDTO> toUserDTOOutList(List<User> users) {
     return users.stream()
-            .map(user -> new UserDTO(
+            .map(user -> new UserRequestDTO(
                             user.getUsername(),
-                            user.getPassword(),
-                            RoleMapping.toRoleDTOList(user.getRoles())
+                            user.getRoles()
                     )
             )
             .toList();
   }
 
-  public static User toUser(UserDTO userDTO) {
+  public static User toUser(UserResponseDTO userResponseDTO) {
     User user = new User();
-    updateUserFromDTO(user, userDTO);
+    user.setUsername(userResponseDTO.username());
+    user.setPassword(userResponseDTO.password());
+    user.setRoles(userResponseDTO.roles());
     return user;
   }
 
-  public static UserDTO toUserDTO(User user) {
-    return new UserDTO(user.getUsername(), user.getPassword(), RoleMapping.toRoleDTOList(user.getRoles()));
+  public static UserRequestDTO toUserOutDTO(User user) {
+    return new UserRequestDTO(user.getUsername(), user.getRoles());
   }
-
-  public static void updateUserFromDTO(User user, UserDTO userDTO) {
-    user.setUsername(user.getUsername());
-    user.setPassword(user.getPassword());
-    user.setRoles(user.getRoles());
-  }
-
 
 }
