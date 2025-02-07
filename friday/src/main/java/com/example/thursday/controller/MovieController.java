@@ -3,17 +3,23 @@ package com.example.thursday.controller;
 import com.example.thursday.dto.MovieDTO;
 import com.example.thursday.dto.MovieMapping;
 import com.example.thursday.model.Movie;
+import com.example.thursday.model.User;
 import com.example.thursday.service.MovieService;
+import com.example.thursday.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 public class MovieController {
@@ -22,10 +28,13 @@ public class MovieController {
   // but not all of them???
 
   private final MovieService movieService;
+  private final UserService userService;
+
 
   @Autowired
-  public MovieController(MovieService movieService) {
+  public MovieController(MovieService movieService, UserService userService) {
     this.movieService = movieService;
+    this.userService = userService;
   }
 
   @GetMapping({"/movies", "/getMovies"}) //basic get all
@@ -76,7 +85,9 @@ public class MovieController {
   @PutMapping({"/movies/{id}", "/updateMovie/{id}"})
   // update by id. if id is free, make shit up idfk
   public ResponseEntity<?> updateMovie(@PathVariable long id,
-                                       @Valid @RequestBody MovieDTO movieDTO) {
+                                       @Valid @RequestBody MovieDTO movieDTO,
+                                       Principal principal) {
+
 
     if (movieService.existsMovieByTitleAndNotId(movieDTO.title(), id) &&
             movieService.existsMovieByDirectorAndNotId(movieDTO.director(), id)) {

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.RequestBody;
 
 //tells spring this has **__BEANS__, WHAT THE FUUUUUUUUCK**
 @Configuration
@@ -26,7 +27,7 @@ public class SecurityConfig {
             .httpBasic(Customizer.withDefaults()) // basic auth
             .formLogin(Customizer.withDefaults()) // login page
             .authorizeHttpRequests(authorize -> authorize // let who access things
-                    .requestMatchers(HttpMethod.PUT, "/users/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/users/{id}").hasRole("USER")
                     .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/addMovie").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT, "/updateMovie/{id}").hasRole("ADMIN")
@@ -37,6 +38,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/getMovie/{id}").hasRole("USER")
                     .requestMatchers(HttpMethod.GET, "/getMoviePaged").hasRole("USER")
                     .requestMatchers(HttpMethod.POST, "/users").permitAll()
+
                     .anyRequest().authenticated()
             );
 

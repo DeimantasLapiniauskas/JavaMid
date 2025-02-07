@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -44,6 +46,7 @@ public class UserController {
 
   @PostMapping("/users")
   public ResponseEntity<?> addUser(@Valid @RequestBody UserResponseDTO userResponseDTO) {
+
     if (userService.existsUserByUsername(userResponseDTO.username())) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username taken, please choose another!");
     }
@@ -57,7 +60,22 @@ public class UserController {
   }
 
   @PutMapping("/users/{id}")
-  public ResponseEntity<?> updateUser(@PathVariable long id, @Valid @RequestBody UserResponseDTO userResponseDTO) {
+  public ResponseEntity<?> updateUser(@PathVariable long id,
+                                      @Valid @RequestBody UserResponseDTO userResponseDTO,
+                                      Principal principal) {
+
+    final User currentUser = userService.findUserByUsername(principal.getName()).get();
+    
+    if (currentUser.getRoles().stream()
+            .noneMatch(
+                    role -> Objects.equals(
+                            role.getName(), "ROLE_ADMIN"
+                    )
+            ) &&
+            currentUser.getId() != id) {
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You are not an admin, nor the owner of this ID.");
+    }
+
     if (userService.existsUserByUsernameAndNotId(userResponseDTO.username(), id)) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username already exists!");
     }
