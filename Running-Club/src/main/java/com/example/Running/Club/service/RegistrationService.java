@@ -1,7 +1,6 @@
 package com.example.Running.Club.service;
 
 import com.example.Running.Club.model.Registration;
-import com.example.Running.Club.model.User;
 import com.example.Running.Club.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

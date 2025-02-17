@@ -2,8 +2,6 @@ package com.example.Running.Club.dto;
 
 import com.example.Running.Club.model.Registration;
 
-import java.util.List;
-
 public class RegistrationMapping {
 
   public static Registration toRegistration(RegistrationRequestDTO registrationRequestDTO) {
