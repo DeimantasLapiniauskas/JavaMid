@@ -4,12 +4,6 @@ import com.example.Running.Club.model.Registration;
 
 public class RegistrationMapping {
 
-  public static Registration toRegistration(RegistrationRequestDTO registrationRequestDTO) {
-    Registration registration = new Registration();
-    registration.setUser(registrationRequestDTO.user());
-    return registration;
-  }
-
   public static RegistrationResponseDTO toRegistrationResponseDTO(Registration registration, String eventName) {
     return new RegistrationResponseDTO(
             registration.getId(),

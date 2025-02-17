@@ -18,10 +18,6 @@ public class RegistrationService {
     this.registrationRepository = registrationRepository;
   }
 
-  public List<Registration> getAll() {
-    return registrationRepository.findAll();
-  }
-
   public Registration saveRegistration(Registration registration) {
     return registrationRepository.save(registration);
   }
