@@ -29,7 +29,10 @@ public class User implements UserDetails {
   )
   private List<Role> roles;
 
-  public User(Long id, String username, String password, List<Role> roles) {
+  public User(Long id,
+              String username,
+              String password,
+              List<Role> roles) {
     this.id = id;
     this.username = username;
     this.password = password;

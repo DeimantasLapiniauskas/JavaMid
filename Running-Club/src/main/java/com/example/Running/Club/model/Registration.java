@@ -36,7 +36,9 @@ public class Registration {
   public Registration() {
   }
 
-  public Registration(long userId, long runningEventId, LocalDateTime registrationDate) {
+  public Registration(long userId,
+                      long runningEventId,
+                      LocalDateTime registrationDate) {
     this.userId = userId;
     this.runningEventId = runningEventId;
     this.registrationDate = registrationDate;

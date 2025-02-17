@@ -21,7 +21,10 @@ public class RunningEvent {
   public RunningEvent() {
   }
 
-  public RunningEvent(String name, LocalDate calendar_date, String location, int maxParticipants) {
+  public RunningEvent(String name,
+                      LocalDate calendar_date,
+                      String location,
+                      int maxParticipants) {
     this.name = name;
     this.calendar_date = calendar_date;
     this.location = location;

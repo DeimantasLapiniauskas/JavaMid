@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RunningEventService {
@@ -18,8 +19,6 @@ public class RunningEventService {
   public boolean existsEventById(long id) {
     return runningEventRepository.existsById(id);
   }
-
-  ;
 
   @Autowired
   public RunningEventService(RunningEventRepository runningEventRepository) {
@@ -36,5 +35,9 @@ public class RunningEventService {
 
   public List<RunningEvent> getAllEvents() {
     return runningEventRepository.findAll();
+  }
+
+  public Optional<RunningEvent> getEventById(long eventId) {
+    return runningEventRepository.findById(eventId);
   }
 }

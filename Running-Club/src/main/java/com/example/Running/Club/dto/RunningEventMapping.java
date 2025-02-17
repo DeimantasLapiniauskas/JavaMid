@@ -29,6 +29,12 @@ public class RunningEventMapping {
   }
 
   public static RunningEventResponseDTO toResponseDTO(RunningEvent runningEvent) {
-    return new RunningEventResponseDTO(runningEvent.getId(), runningEvent.getName(), runningEvent.getCalendar_date(), runningEvent.getLocation(), runningEvent.getMaxParticipants());
+    return new RunningEventResponseDTO(
+            runningEvent.getId(),
+            runningEvent.getName(),
+            runningEvent.getCalendar_date(),
+            runningEvent.getLocation(),
+            runningEvent.getMaxParticipants()
+    );
   }
 }

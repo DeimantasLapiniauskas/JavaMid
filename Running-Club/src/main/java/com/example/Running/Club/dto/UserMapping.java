@@ -6,12 +6,11 @@ import java.util.List;
 
 public class UserMapping {
 
-  public static List<UserRequestDTO> toUserDTOList(List<User> users) {
+  public static List<UserResponseListableDTO> toUserDTOList(List<User> users) {
     return users.stream()
-            .map(user -> new UserRequestDTO(
-                            user.getUsername(),
-                            user.getPassword(),
-                            user.getRoles()
+            .map(user -> new UserResponseListableDTO(
+                            user.getId(),
+                            user.getUsername()
                     )
             )
             .toList();
@@ -26,6 +25,10 @@ public class UserMapping {
   }
 
   public static UserResponseDTO toUserResponseDTO(User user) {
-    return new UserResponseDTO(user.getId(), user.getUsername(), user.getRoles());
+    return new UserResponseDTO(
+            user.getId(),
+            user.getUsername(),
+            user.getRoles()
+    );
   }
 }

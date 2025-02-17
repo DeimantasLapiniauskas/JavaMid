@@ -25,7 +25,6 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.POST, "/api/events").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.DELETE, "/api/events/**").permitAll()
                             .requestMatchers(HttpMethod.GET, "/api/events/*/participants").hasRole("ADMIN")
-                            .requestMatchers("/error/**").permitAll() // lets user see actual errors instead of 403 with no body
                             .anyRequest().authenticated()
             )
             .csrf(AbstractHttpConfigurer::disable)

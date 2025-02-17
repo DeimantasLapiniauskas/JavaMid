@@ -28,15 +28,17 @@ public class UserController {
 
   @PostMapping("/auth/register")
   public ResponseEntity<?> addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+
     if (userService.existsUserByUsername(userRequestDTO.username())) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username taken, please choose another!");
     }
 
     User user = UserMapping.toUser(userRequestDTO);
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    userService.saveUser(user);
+    user = userService.saveUser(user);
 
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(UserMapping.toUserResponseDTO(user));
   }
+
 }
